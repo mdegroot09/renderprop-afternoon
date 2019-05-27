@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
+import CurrencyDisplay from './CurrencyDisplay'
 
-export default class Currency extends Component {
+class Currency extends Component {
   state = {
     currencyChosen: false,
     selectedCurrency: 'Select Currency',
@@ -61,11 +62,18 @@ export default class Currency extends Component {
 					<button className='add' onClick={this.handleAmountIncrease}>+</button>
 					<button className='minus' onclick={this.handleAmountDecrease}>-</button>
 				</div>
-				{this.props.render(
-					currencyData[this.state.selectedCurrency],
-					this.state.amount
-				)}
+        {this.state.currencyChosen ? (
+          this.props.render(
+            currencyData[this.state.selectedCurrency],
+            this.state.amount)
+        ) : (
+          <p>Please Select Currency</p>
+        )}
       </div>
     )
   }
 }
+
+const ExchangedCurrency = Currency(CurrencyDisplay)
+
+export default ExchangedCurrency
